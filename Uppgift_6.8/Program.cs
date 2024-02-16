@@ -5,8 +5,27 @@ namespace Uppgift_6_8
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(ÄrPrimt(27));
-            Console.WriteLine(ÄrPrimt(37));
+            Console.WriteLine("Skriv in ett heltal");
+            int tal = ReadInt();
+
+            Console.WriteLine($"Det finns {NrPrimtalUnder(tal)} primtal under {tal}");
+        }
+        /// <summary>
+        /// Returnerar antalet primtal under talet n
+        /// </summary>
+        /// <param name="n">Talet n</param>
+        /// <returns>Hur många primtal som finns under n</returns>
+        static int NrPrimtalUnder(int n)
+        {
+            int summa = 0;
+            for (int i = 2; i < n; i++)
+            {
+                if (ÄrPrimt(i))
+                {
+                    summa++;
+                }
+            }
+            return summa;
         }
         /// <summary>
         /// Kollar om ett tal är primt
@@ -15,7 +34,7 @@ namespace Uppgift_6_8
         /// <returns>Om talet är primt eller ej</returns>
         static bool ÄrPrimt(int tal)
         {
-            if (tal == 1)
+            if (tal == 1 || tal == 0)
             {
                 return false;
             }
@@ -29,6 +48,19 @@ namespace Uppgift_6_8
             }
 
             return true;
+        }
+        /// <summary>
+        /// Läser in ett int-tal från användaren
+        /// </summary>
+        /// <returns>Talet användaren skrev</returns>
+        static int ReadInt()
+        {
+            int tal;
+            while (!int.TryParse(Console.ReadLine(), out tal))
+            {
+                Console.WriteLine("Ogiltigt svar. Försök igen");
+            }
+            return tal;
         }
     }
 }
